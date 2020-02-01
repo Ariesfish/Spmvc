@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import xyz.ariesfish.domain.Account;
+import xyz.ariesfish.domain.User;
 
 @Controller
 @RequestMapping(path = "/param") // 具体的模块
@@ -36,6 +37,18 @@ public class ParamController {
     public String saveAccount(Account account) {
         System.out.println("Test parameter");
         System.out.println(account);
+        return "success";
+    }
+
+    /**
+     * 自定义类型转换器
+     * @param user
+     * @return
+     */
+    @RequestMapping(path = "/saveUser")
+    public String saveUser(User user) {
+        System.out.println("Test parameter");
+        System.out.println(user);
         return "success";
     }
 }
