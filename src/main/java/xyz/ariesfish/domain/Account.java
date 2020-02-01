@@ -1,14 +1,17 @@
 package xyz.ariesfish.domain;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 public class Account implements Serializable {
 
     private String username;
     private String password;
     private Float money;
-    private User user;
 
+    private List<User> userList;
+    private Map<String, User> userMap;
 
     public String getUsername() {
         return username;
@@ -34,12 +37,20 @@ public class Account implements Serializable {
         this.money = money;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+    public Map<String, User> getUserMap() {
+        return userMap;
+    }
+
+    public void setUserMap(Map<String, User> userMap) {
+        this.userMap = userMap;
     }
 
     @Override
@@ -48,7 +59,8 @@ public class Account implements Serializable {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", money=" + money +
-                ", user=" + user +
+                ", userList=" + userList +
+                ", userMap=" + userMap +
                 '}';
     }
 }
