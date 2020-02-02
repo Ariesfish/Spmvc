@@ -4,32 +4,15 @@
     <title>Title</title>
 </head>
 <body>
-    <h3>入门程序</h3>
-    <a href="param/testServletAPI">Test Servlet API</a>
+    <a href="user/testString">testString</a>
     <br>
-
-    <!-- 自定义类型转换器 -->
-    <form action="param/testRequestBody" method="post">
-        Name: <input type="text" name="name" /><br/>
-        Age: <input type="text" name="age" /><br/>
-        Birthday: <input type="text" name="birthday" /><br/>
-        <input type="submit" value="提交"/><br/>
-    </form>
-
+    <a href="user/testVoid">testVoid</a>
     <br>
-    <a href="param/testPathVariable/10">Test Path Variable</a>
-
-    <form action="param/testModeAttribute" method="post">
-        Name: <input type="text" name="name" /><br/>
-        Age: <input type="text" name="age" /><br/>
-        <input type="submit" value="提交"/><br/>
-    </form>
-
+    <a href="user/testModelAndView">testModelAndView</a>
     <br>
-    <a href="param/setSessionAttribute">Set Session Attribute</a>
+    <a href="user/testForward">testForward</a>
     <br>
-    <a href="param/getSessionAttribute">Get Session Attribute</a>
+    <a href="user/testRedirect">testRedirect</a>
     <br>
-    <a href="param/delSessionAttribute">Delete Session Attribute</a>
 </body>
 </html>

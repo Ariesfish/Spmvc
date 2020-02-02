@@ -6,7 +6,7 @@
 <body>
     <h3>入门成功！！</h3>
 
-    ${ requestScope.message }
-    ${ sessionScope }
+    ${ requestScope.Maurice }
+
 </body>
 </html>

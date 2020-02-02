@@ -15,20 +15,11 @@
     <context:component-scan base-package="xyz.ariesfish"></context:component-scan>
 
     <!-- 开启SpringMVC框架的注解支持 -->
-    <mvc:annotation-driven conversion-service="conversionService2"/>
+    <mvc:annotation-driven/>
 
     <!-- 配置视图解析器 -->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"></property>
         <property name="suffix" value=".jsp"></property>
-    </bean>
-
-    <!-- 配置自定义类型转换器 -->
-    <bean id="conversionService2" class="org.springframework.context.support.ConversionServiceFactoryBean">
-        <property name="converters">
-            <set>
-                <bean class="xyz.ariesfish.utils.StringToDateConverter"/>
-            </set>
-        </property>
     </bean>
 </beans>
