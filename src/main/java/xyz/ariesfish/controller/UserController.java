@@ -65,4 +65,15 @@ public class UserController {
         System.out.println("------ testRedirect ------");
         return "redirect:/response.jsp"; // 不用额外加入项目名称 request.getContextPath()
     }
+
+    @RequestMapping(path = "/testAjax")
+    public @ResponseBody User testAjax(@RequestBody User user) {
+        System.out.println("------ testAjax ------");
+        // 客户端发送的ajax请求, 传递的json字符串后端已经封装到user对象中
+        System.out.println(user);
+
+        // 响应, 模拟数据库查询
+        user.setAge(40);
+        return user;
+    }
 }
