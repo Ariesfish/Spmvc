@@ -1,13 +1,20 @@
 package xyz.ariesfish.controller;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.ariesfish.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(path = "/user")
@@ -75,5 +82,60 @@ public class UserController {
         // 响应, 模拟数据库查询
         user.setAge(40);
         return user;
+    }
+
+    @RequestMapping("/fileUpload")
+    public String fileUpload(HttpServletRequest request) throws Exception {
+        System.out.println("------ File Uploading ------");
+        // 使用fileUpload组件上创文件
+        String path = request.getSession().getServletContext().getRealPath("/uploads/");
+        File dir = new File(path);
+        // 创建文件夹
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        // 解析request
+        List<FileItem> items = upload.parseRequest(request);
+        for (FileItem item : items) {
+            if (item.isFormField()) { // 普通表单项
+
+            } else { // 上传文件项
+                // 上传文件的名称
+                String filename = item.getName();
+                // 使文件名唯一
+                String uuid = UUID.randomUUID().toString().replace("-", "");
+                filename = uuid + "_" + filename;
+                // 文件上传
+                item.write(new File(path, filename));
+                // 删除临时文件
+                item.delete();
+            }
+        }
+        return "success";
+    }
+
+    @RequestMapping("/mvcFileUpload")
+    public String mvcFileUpload(HttpServletRequest request, MultipartFile upload) throws Exception {
+        System.out.println("------ MVC File Uploading ------");
+        // 使用fileUpload组件上创文件
+        String path = request.getSession().getServletContext().getRealPath("/uploads/");
+        File dir = new File(path);
+        // 创建文件夹
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        // 上传文件的名称
+        String filename = upload.getOriginalFilename();
+        // 使文件名唯一
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        filename = uuid + "_" + filename;
+        // 文件上传
+        upload.transferTo(new File(path, filename));
+
+        return "success";
     }
 }

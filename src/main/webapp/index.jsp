@@ -35,5 +35,17 @@
     <a href="user/testRedirect">testRedirect</a>
     <br>
     <button id="sendAjax">Send Ajax</button>
+
+    <h3>传统方式上传文件</h3>
+    <form action="user/fileUpload" method="post" enctype="multipart/form-data">
+        Select File: <input type="file" name="upload" /><br/>
+        <input type="submit" value="Upload"/>
+    </form>
+
+    <h3>SpringMVC方式上传文件</h3>
+    <form action="user/mvcFileUpload" method="post" enctype="multipart/form-data">
+        Select File: <input type="file" name="upload" /><br/>
+        <input type="submit" value="Upload"/>
+    </form>
 </body>
 </html>
