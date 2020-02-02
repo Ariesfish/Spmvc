@@ -1,5 +1,7 @@
 package xyz.ariesfish.controller;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -87,7 +89,7 @@ public class UserController {
     @RequestMapping("/fileUpload")
     public String fileUpload(HttpServletRequest request) throws Exception {
         System.out.println("------ File Uploading ------");
-        // 使用fileUpload组件上创文件
+        // 使用fileUpload组件上传文件
         String path = request.getSession().getServletContext().getRealPath("/uploads/");
         File dir = new File(path);
         // 创建文件夹
@@ -120,7 +122,6 @@ public class UserController {
     @RequestMapping("/mvcFileUpload")
     public String mvcFileUpload(HttpServletRequest request, MultipartFile upload) throws Exception {
         System.out.println("------ MVC File Uploading ------");
-        // 使用fileUpload组件上创文件
         String path = request.getSession().getServletContext().getRealPath("/uploads/");
         File dir = new File(path);
         // 创建文件夹
@@ -135,6 +136,31 @@ public class UserController {
         filename = uuid + "_" + filename;
         // 文件上传
         upload.transferTo(new File(path, filename));
+
+        return "success";
+    }
+
+    @RequestMapping("/overFileUpload")
+    public String overFileUpload(MultipartFile upload) throws Exception {
+        System.out.println("------ Multi Server File Uploading ------");
+        // 定义上传文件服务器的路径
+        String path = "http://localhost:8090/uploads/";
+
+        // 上传文件的名称
+        String filename = upload.getOriginalFilename();
+        // 使文件名唯一
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        filename = uuid + "_" + filename;
+
+        // 创建客户端对象
+        Client client = Client.create();
+
+        // 和文件服务器进行连接
+        System.out.println(path+filename);
+        WebResource webResource = client.resource(path+filename);
+
+        // 调用PUT方法上传文件，需要将Tomcat的conf/web.xml servlet 设置 readonly 为 false
+        webResource.put(upload.getBytes());
 
         return "success";
     }

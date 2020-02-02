@@ -47,5 +47,11 @@
         Select File: <input type="file" name="upload" /><br/>
         <input type="submit" value="Upload"/>
     </form>
+
+    <h3>跨服务器上传文件</h3>
+    <form action="user/overFileUpload" method="post" enctype="multipart/form-data">
+        Select File: <input type="file" name="upload" /><br/>
+        <input type="submit" value="Upload"/>
+    </form>
 </body>
 </html>
