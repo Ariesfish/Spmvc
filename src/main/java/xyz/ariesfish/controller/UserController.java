@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.ariesfish.domain.User;
+import xyz.ariesfish.exception.SysException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -162,6 +163,18 @@ public class UserController {
         // 调用PUT方法上传文件，需要将Tomcat的conf/web.xml servlet 设置 readonly 为 false
         webResource.put(upload.getBytes());
 
+        return "success";
+    }
+
+    @RequestMapping(path = "/testException")
+    public String testException() throws Exception {
+        System.out.println("------ testException ------");
+        try {
+            int i = 1 / 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new SysException("查询用户出错");
+        }
         return "success";
     }
 }

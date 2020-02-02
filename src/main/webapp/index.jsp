@@ -53,5 +53,8 @@
         Select File: <input type="file" name="upload" /><br/>
         <input type="submit" value="Upload"/>
     </form>
+
+    <br>
+    <a href="user/testException">testException</a>
 </body>
 </html>
