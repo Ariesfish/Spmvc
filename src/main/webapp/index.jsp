@@ -56,5 +56,7 @@
 
     <br>
     <a href="user/testException">testException</a>
+    <br>
+    <a href="user/testInterceptor">testInterceptor</a>
 </body>
 </html>

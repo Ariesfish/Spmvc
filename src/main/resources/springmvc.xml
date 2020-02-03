@@ -31,6 +31,19 @@
     <!-- 配置异常处理器 -->
     <bean id="sysExceptionResolver" class="xyz.ariesfish.exception.SysExceptionResolver"></bean>
 
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <!-- 配置第一个拦截器 -->
+        <mvc:interceptor>
+            <!-- 要拦截的具体方法 -->
+            <mvc:mapping path="/user/*"/>
+            <!-- 配置拦截器类 -->
+            <bean class="xyz.ariesfish.Interceptor.UserInterceptor"></bean>
+        </mvc:interceptor>
+
+        <!-- 配置第二个拦截器 -->
+    </mvc:interceptors>
+
     <!-- 配置不拦截静态资源 -->
     <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
     <mvc:resources mapping="/images/**" location="/images/"></mvc:resources>
